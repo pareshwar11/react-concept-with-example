@@ -1,47 +1,57 @@
-import React from 'react'
-import { Component } from 'react';
+import React from "react";
+import { Component } from "react";
+import CardList from "./card-list/CardList";
 
-class Aprogram extends Component{
-    constructor(){
+class Aprogram extends Component {
+    constructor() {
         super();
-        this.state={
-            line:'dosto'
-        }
-        this.state={
-            monstar:[
-                {
-                    name:'paresh',
-                    id:'1'
-                },
-                {
-                    name:'vivek',
-                    id:'2'
-                },
-                {
-                    name:'arun',
-                    id:'3'
-                }
-            ]
-        }
+        this.state = {
+            monstar: [],
+            searchField:''
+        };
     }
-    render(){
-        return(
-            < >
-                <h1>Hello {this.state.line}</h1>
-                <button onClick={()=>{
-                    this.setState({
-                        line:'friend'
-                    })
-                }}>Change Tag</button>
-                {
-                    this.state.monstar.map((monstars)=>{
-                        return <div key={monstars.id}>
-                            <h1>{monstars.name}</h1>
-                            </div>
-                    })
-                }
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then((res) => res.json())
+            .then((users) =>
+                this.setState(
+                    () => {
+                        return { monstar: users };
+                    },
+                    () => {
+                        return console.log(this.state);
+                    }
+                )
+            );
+    }
+    searchIterm=(e) => {
+        console.log(e.target.value);
+        const searchField=e.target.value.toLocaleUpperCase();
+        this.setState(()=>{
+            return {searchField};
+        })
+    }
+    render() {
+        const {monstar, searchField}=this.state; // state destructuring
+        const {searchIterm}=this; // function destructuring 
+        const filteredMonstar=monstar.filter((monstar)=>{
+            return monstar.name.toLocaleUpperCase().includes(searchField);
+        });
+
+        return (
+            <>
+                <div>
+                    <input
+                        type="search"
+                        placeholder="enter text"
+                        onChange={searchIterm}
+                    ></input>
+                    <br />
+                  
+                    <CardList monstar={filteredMonstar}/>
+                </div>
             </>
-        )
+        );
     }
 }
 export default Aprogram;
