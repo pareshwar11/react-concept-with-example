@@ -14,4 +14,12 @@ class Card extends Component {
         )
     }
 }
+
+{/* <div className="row">
+<div className="col-md-4">
+<img alt={`monstar ${name}`} src={`https://robohash.org/${id}?set=set2&size=180x180`}></img>
+<h2>{name}</h2>
+<p>{email}</p>
+</div>
+</div> */}
 export default Card;

@@ -36,7 +36,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <h1 className="app-title">40 Youth in Fobes</h1>
+          <h1 className="app-title">Filter Functionality Using ReactJS</h1>
          <SearchBox onChangeHandler={searchIterm} inplaceholder="Search User" className='monstar-search-box'/>
           <br />
           <CardList monstar={filteredMonstar} />
