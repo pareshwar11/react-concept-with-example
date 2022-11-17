@@ -47,7 +47,6 @@ class Aprogram extends Component {
                         onChange={searchIterm}
                     ></input>
                     <br />
-                  
                     <CardList monstar={filteredMonstar}/>
                 </div>
             </>
